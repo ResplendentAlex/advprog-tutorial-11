@@ -32,19 +32,26 @@ AdvProg A
    ```
    `<deployment-name>` depends on the name of the deployment that have been created. In my case `<deployment-name>` would be replaced with spring-petclinic-rest. Once we have accessed the file, we should change `.spec.strategy` configuration to this:
    ![Code Specification](https://github.com/user-attachments/assets/69cc020e-f4fa-4aeb-a006-d199fdaab4da)
+   
    Here, I am changing the configuration for the strategy so that it would use Recreate instead of the default Rolling Update deployment strategy. Next, I would like to update my spring-petclinic-rest to the latest image, so that there would be obvious differences. This is the current state of my pods and deployments:
+   
    a) `kubectl get deployments`
    ![Before Update Deployments](https://github.com/user-attachments/assets/becfc5ee-682c-4a5a-9abb-83d119b7fc48)
+   
    b) `kubectl get rs`
    ![Before Update rs](https://github.com/user-attachments/assets/605dcbc1-e167-4b26-b2e1-ebde69e9a783)
+   
    c) `kubectl get pods -o wide`
    ![Before Update pods](https://github.com/user-attachments/assets/67640dad-4e79-4c72-bbd1-e7a25b5fce72)
+   
    d) `kubectl describe pods <pod>`
    ![Before Update pods description](https://github.com/user-attachments/assets/77f0786c-d239-45ee-b0fc-50d925d633aa)
 
    After changing the current image to the Docker image link `docker.io/spring-petclinic-rest:latest` which would replace it with the working latest image registered in Docker Hub. This could be seen from the change in the description of the deployment:
+   
    a) `kubectl describe deployment/spring-petclinic-rest`
    ![After Update Deployment](https://github.com/user-attachments/assets/3458f4b2-88f4-426b-b76b-f951778bed4f)
+   
    b) `kubectl get pods -o wide`
    ![After Update pods](https://github.com/user-attachments/assets/29210b2d-4b67-42cc-bf76-d3f5a267c843)
 
